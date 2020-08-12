@@ -1,0 +1,17 @@
+DROP TABLE IF EXISTS trade_store;
+ 
+CREATE TABLE trade_store (
+  id VARCHAR(250) PRIMARY KEY AUTO_INCREMENT,
+  trade_id VARCHAR(250) NOT NULL,
+  version INT NOT NULL,
+  counter_party_id VARCHAR(250) NOT NULL,
+  book_id VARCHAR(250) NOT NULL,
+  maturity_date DATE NOT NULL,
+  created_date DATE NOT NULL,
+  expired CHAR
+);
+ 
+INSERT INTO trade_store (id, trade_id, version, counter_party_id, book_id, maturity_date, created_date, expired) VALUES
+  ('1', 'T1', 1, 'CP-1', 'B1', '2020-05-20', now(), 'N'),
+  ('2', 'T2', 2, 'CP-2', 'B1', '2021-05-21', now(), 'N'),
+  ('3', 'T3', 3, 'CP-3', 'B2', '2014-05-20', now(), 'Y');
