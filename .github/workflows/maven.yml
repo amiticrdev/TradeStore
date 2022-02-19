@@ -32,9 +32,3 @@ jobs:
       
     - name: Print the input tag to STDOUT
       run: echo  The tag is ${{ github.event.inputs.apigeeType }}
-     
-    - name: Retrieve secret
-      env:
-        super_secret: ${{  github.event.inputs.apigeeType == 'EXTERNAL' && 'apigee-externl-url' ||  'apigee-internal-url' }}
-        run: |
-           echo  The Super secret is "$super_secret"  
