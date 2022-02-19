@@ -31,4 +31,4 @@ jobs:
       run: mvn -B package --file pom.xml
       
     - name: Print the input tag to STDOUT
-      run: echo  The tag is ${{ github.event.inputs.apigeeType }}
+      run: echo  The tag is ${{  github.event.inputs.apigeeType == 'EXTERNAL' && 'apigee-externl-url' ||  'apigee-internal-url' }}
