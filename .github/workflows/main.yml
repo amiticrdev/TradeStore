@@ -24,10 +24,14 @@ on:
         required: false 
 
 jobs:
-  test:
+  build:
+    name: test action
     runs-on: ubuntu-latest
-
+    
     steps:
+      - name: Clone Repository (Latest)
+        uses: actions/checkout@v2
+
       - name: Print the input tag to STDOUT
         run: echo  The tag is ${{ github.event.inputs.apigeeType }}
      
