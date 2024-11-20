@@ -1,0 +1,57 @@
+name: Version Update
+
+on:
+  push:
+    branches:
+      - main  # Trigger when changes are pushed to the 'main' branch
+
+jobs:
+  update-version:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      # Set up Node.js to install gh CLI (needed for creating PRs)
+      - name: Set up GitHub CLI
+        run: |
+          curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo tee /usr/share/keyrings/githubcli.asc
+          sudo apt update
+          sudo apt install gh
+
+      # List of repositories to update
+      - name: Set repositories to update
+        run: echo "REPOS=(repo1 repo2)" >> $GITHUB_ENV
+
+      # Loop through repositories, checkout, update version, commit and create PR
+      - name: Update version in pom.xml, commit and create PR
+        run: |
+          for REPO in ${REPOS[@]}; do
+            echo "Updating version for ${REPO}"
+            
+            # Clone the repo
+            git clone https://github.com/your-username/${REPO}.git
+            cd ${REPO}
+
+            # Update version in pom.xml (using sed to replace versions in pom.xml)
+            VERSION="1.2.0"  # Define your version here
+            sed -i 's/<version>.*<\/version>/<version>'${VERSION}'<\/version>/' pom.xml
+
+            # Configure git
+            git config user.email "you@example.com"
+            git config user.name "GitHub Actions"
+
+            # Commit and push changes to a new branch
+            BRANCH_NAME="update-version-${VERSION}"
+            git checkout -b $BRANCH_NAME
+            git add pom.xml
+            git commit -m "Update version to ${VERSION}"
+            git push --set-upstream origin $BRANCH_NAME
+
+            # Create a pull request
+            gh pr create --repo your-username/${REPO} --base main --head $BRANCH_NAME --title "Update version to ${VERSION}" --body "This PR updates the version in pom.xml"
+
+            cd ..
+
+          done
