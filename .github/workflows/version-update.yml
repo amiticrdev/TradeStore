@@ -22,7 +22,7 @@ jobs:
 
       # List of repositories to update
       - name: Set repositories to update
-        run: echo "REPOS=(TradeStore WUnderground)" >> $GITHUB_ENV
+        run: echo "REPOS=TradeStore WUnderground" >> $GITHUB_ENV
 
       # Loop through repositories, checkout, update version, commit and create PR
       - name: Update version in pom.xml, commit and create PR
@@ -31,7 +31,7 @@ jobs:
             echo "Updating version for ${REPO}"
             
             # Clone the repo
-            git clone https://github.com/your-username/${REPO}.git
+            git clone https://github.com/amiticrdev/${REPO}.git
             cd ${REPO}
 
             # Update version in pom.xml (using sed to replace versions in pom.xml)
