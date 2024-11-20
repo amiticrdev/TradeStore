@@ -22,7 +22,7 @@ jobs:
 
       # List of repositories to update
       - name: Set repositories to update
-        run: echo "REPOS=(repo1 repo2)" >> $GITHUB_ENV
+        run: echo "REPOS=(TradeStore WUnderground)" >> $GITHUB_ENV
 
       # Loop through repositories, checkout, update version, commit and create PR
       - name: Update version in pom.xml, commit and create PR
