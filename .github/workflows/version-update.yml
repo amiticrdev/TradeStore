@@ -50,7 +50,7 @@ jobs:
             git push --set-upstream origin $BRANCH_NAME
 
             # Create a pull request
-            gh pr create --repo https://github.com/amiticrdev/${REPO} --base main --head $BRANCH_NAME --title "Update version to ${VERSION}" --body "This PR updates the version in pom.xml"
+            gh pr create --repo https://github.com/amiticrdev/${REPO}.git --base main --head $BRANCH_NAME --title "Update version to ${VERSION}" --body "This PR updates the version in pom.xml"
 
             cd ..
 
