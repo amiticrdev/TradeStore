@@ -39,8 +39,8 @@ jobs:
             sed -i 's/<version>.*<\/version>/<version>'${VERSION}'<\/version>/' pom.xml
 
             # Configure git
-            git config user.email "you@example.com"
-            git config user.name "GitHub Actions"
+            git config user.email "amitks.kumar@gmail.com"
+            git config user.name "amiticrdev"
 
             # Commit and push changes to a new branch
             BRANCH_NAME="update-version-${VERSION}"
